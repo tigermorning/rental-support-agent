@@ -33,6 +33,8 @@ ANSWER_MODEL = os.environ.get("RENTAL_ANSWER_MODEL", "gpt-5.6-terra")
 CONF_THRESHOLD = 0.5    # 라우팅 확신도 임계값
 MAX_TOOL_TURNS = 5      # 도구 호출 루프 상한
 VERIFY_RETRY = 1        # 검증 실패 시 재생성 횟수
+# 규칙 검증 통과 후 LLM 문장 근거 검사(실험 9). 점수 개선 없고 오탐이 불필요한 넘김을 만들어 기본 끔. 답변당 호출 1회 추가
+GROUNDING_CHECK = os.environ.get("RENTAL_GROUNDING_CHECK", "0") == "1"
 WORKERS = 8             # 동시 호출 수. 요청 한도에 걸리면 낮춘다
 
 ROUTES = ["SCOPE", "ACCOUNT_PRIVACY", "LISTING", "INTERVIEW", "REPORT", "OTHER"]

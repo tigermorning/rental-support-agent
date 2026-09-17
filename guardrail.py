@@ -112,6 +112,10 @@ def feedback_text(result):
         elif v["type"] == "넘김 약속 불이행":
             lines.append(f"- '{v['detail']}'라고 썼지만 escalate_to_operator 를 부르지 않았다. "
                          "넘길 거면 도구를 부르고, 조항으로 답이 끝나면 그 문장을 뺀다")
+        elif v["type"] == "근거 없는 문장":
+            for u in v["detail"]:
+                lines.append(f"- 「{u['sentence']}」는 조회한 조항에 근거가 없다({u['basis']}). "
+                             "조항에 있는 내용으로 고치거나 빼고, 물은 사실이 조항에 없으면 운영자에게 넘긴다")
         elif v["type"] == "조회하지 않은 조항 인용":
             lines.append(f"- 조회하지 않은 {v['detail']} 를 인용했다. 조회한 조항만 인용한다")
         else:

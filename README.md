@@ -33,6 +33,7 @@ cp .env.example .env          # OPENAI_API_KEY 채우기
 | 실행 결과 문항별 비교 | `python scripts/compare_runs.py 이름1 이름2` | 없음 |
 | 평가셋 형식·누출 검사 | `python scripts/check_goldenset.py` | 없음 |
 | 검증기 오프라인 시험 | `python scripts/test_guardrail.py` | 없음 |
+| 의미 수준 검증기 시험 (저장된 답변) | `python scripts/test_grounding.py` | 약 170회 |
 
 ## 파일 지도
 
@@ -49,10 +50,11 @@ cp .env.example .env          # OPENAI_API_KEY 채우기
 | `router.py` | `classify`(LLM) · `gate`(확신도 정책) |
 | `tools.py` · `answer.py` | 조항 조회 도구, 라우트별 도구 바인딩 호출 루프 |
 | `guardrail.py` | 답변의 숫자·연락처·조항 인용이 조회한 조항에 있는지 검증 |
+| `grounding.py` | 답변 문장마다 조회한 조항에 근거가 있는지 LLM 판정. 기본 꺼 둠(`RENTAL_GROUNDING_CHECK=1`로 켬, 실험 9) |
 | `agent.py` | 전체 LangGraph 파이프라인 |
 | `judge.py` · `evaluate.py` | 사실 단위 LLM 채점기, 측정 |
 | `app.py` | Streamlit 데모 |
-| `runs/LAB.md` | 실험 8회 기록과 실패 분석 |
+| `runs/LAB.md` | 실험 9회 기록과 실패 분석 |
 | `runs/*.json` · `runs/*.log` | 측정별 문항 답변·채점 결과와 출력 |
 
 ## 지킨 것

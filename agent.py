@@ -10,8 +10,9 @@ from typing import List, Optional, TypedDict
 from langgraph.graph import END, START, StateGraph
 
 from answer import answer_with_tools
-from config import VERIFY_RETRY
+from config import GROUNDING_CHECK, VERIFY_RETRY
 from context import ESCALATE_TOOL
+from grounding import check_grounding
 from guardrail import feedback_text, verify
 from prompts import LOW_CONF_MESSAGE, OUT_OF_SCOPE_MESSAGE, VERIFY_FAIL_MESSAGE
 from router import classify, gate
@@ -47,6 +48,11 @@ def node_answer(state: AgentState) -> AgentState:
 def node_verify(state: AgentState) -> AgentState:
     result = verify(state["answer"], state["question"], state["sections"], state["tools"],
                     state["action"] == "ESCALATE")
+    # 규칙이 통과한 답만 LLM 으로 문장 근거를 본다. 규칙에 걸린 답은 어차피 재생성하므로 호출을 아낀다
+    if result["ok"] and GROUNDING_CHECK:
+        g = check_grounding(state["answer"], state["question"], state["sections"])
+        if not g["ok"]:
+            result = {"ok": False, "violations": [{"type": "근거 없는 문장", "detail": g["unsupported"]}]}
     history = (state.get("history") or []) + [{"answer": state["answer"], "tools": state["tools"],
                                                "verify": result}]
     return {"verify": result, "history": history}
