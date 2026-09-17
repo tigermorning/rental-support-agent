@@ -38,6 +38,12 @@ CASES = [
     ("처리 기간 지어냄", s("get_listing_rules"), "확인은 1~2영업일 걸립니다.", False, False, "문의"),
     ("'한 건씩'은 수량 아님 (실제 오탐)", s("get_service_scope"),
      "신청 목록에서 한 건씩 확인해 결정해 주세요.", False, True, "문의"),
+    ("넘긴다고 말하고 도구 안 부름 (E-035 실제 사례)", s("get_report_process"),
+     "신고 누적 기준은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.", False, False, "문의"),
+    ("넘긴다고 말하고 도구 부름", s("get_report_process"),
+     "신고 누적 기준은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.", True, True, "문의"),
+    ("운영자 언급이지만 넘김 약속 아님", s("get_report_process"),
+     "회사는 신고를 접수하면 사실관계를 확인합니다.", False, True, "문의"),
     ("원문 72시간", s("get_privacy_safeguards"), "72시간 이내에 신고합니다.", False, True, "문의"),
 ]
 

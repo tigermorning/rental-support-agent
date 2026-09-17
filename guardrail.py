@@ -7,6 +7,7 @@
 - 출처 불명 연락처: 이메일·URL·전화번호가 허용 출처에 없음
 - 조회하지 않은 조항 인용: "약관 9조"처럼 인용했는데 조회 결과에 그 조항이 없고 원문에서 언급도 안 됨
 - 근거 없는 답변: 조회도 넘김도 없이 답함
+- 넘김 약속 불이행: "운영자에게 전달하겠다"고 썼는데 escalate_to_operator 를 안 부름
 
 숫자 아닌 사실(예: "보증보험으로 보호됩니다")은 못 잡는다. 그건 채점기의 forbid 가 잰다.
 """
@@ -26,6 +27,8 @@ CONTACT_RE = re.compile(
     r"|https?://\S+|www\.\S+|\b[\w-]+\.(?:go|or|co)\.kr\b"   # URL·도메인
     r"|\b\d{2,4}-\d{3,4}(?:-\d{4})?\b"          # 전화번호
 )
+# "운영자에게 전달하겠다"처럼 넘긴다고 말하는 표현. 말만 하고 escalate_to_operator 를 안 부르면 실제로는 안 넘어간다
+HANDOFF_RE = re.compile(r"(운영자|운영팀|담당자|상담원)[^.?!\n]{0,12}(전달|연결|넘기|넘겨|문의드리|요청드리|확인드리|확인해 드리|확인 후)")
 CITE_RE = re.compile(r"(약관|이용약관|처리방침|개인정보처리방침|가이드라인)\s*(?:제\s*)?(\d+)\s*(조|항)")
 CITE_LABEL = {"약관": "약관", "이용약관": "약관", "처리방침": "처리방침",
               "개인정보처리방침": "처리방침", "가이드라인": "가이드라인"}
@@ -62,6 +65,9 @@ def verify(answer, question, sections, called_tools, escalated):
     if not sections and not escalated:
         violations.append({"type": "근거 없는 답변", "detail": "조항 조회도 넘김도 없이 답했다"})
 
+    if not escalated and (m := HANDOFF_RE.search(answer or "")):
+        violations.append({"type": "넘김 약속 불이행", "detail": m.group(0)})
+
     body = LIST_MARKER_RE.sub("", answer or "")
     # 조항 인용은 따로 본다. 인용 숫자가 숫자 검사에 섞이지 않게 먼저 떼어 둔다
     cited = [(CITE_LABEL[m.group(1)], m.group(2), m.group(3)) for m in CITE_RE.finditer(body)]
@@ -95,6 +101,9 @@ def feedback_text(result):
             lines.append(f"- 조회한 조항에 없는 숫자 {v['detail']} 를 썼다. 조항에 없는 숫자는 빼고, 없는 사실이면 운영자에게 넘긴다")
         elif v["type"] == "출처 불명 연락처":
             lines.append(f"- 조회한 조항에 없는 연락처 {v['detail']} 를 썼다. 연락처를 지어내지 않는다")
+        elif v["type"] == "넘김 약속 불이행":
+            lines.append(f"- '{v['detail']}'라고 썼지만 escalate_to_operator 를 부르지 않았다. "
+                         "넘길 거면 도구를 부르고, 조항으로 답이 끝나면 그 문장을 뺀다")
         elif v["type"] == "조회하지 않은 조항 인용":
             lines.append(f"- 조회하지 않은 {v['detail']} 를 인용했다. 조회한 조항만 인용한다")
         else:
