@@ -103,6 +103,33 @@ def check(items):
     return errors
 
 
+def _bigrams(text: str):
+    t = re.sub(r"\s", "", text)
+    return {t[i : i + 2] for i in range(len(t) - 1)}
+
+
+def shared_facts(fewshot, evalset, threshold=0.5):
+    """예시용 must 사실 중 평가용과 같은 조항·거의 같은 문장인 것. 프롬프트 예시로 정답이 새는지 본다.
+
+    질문 문장 유사도는 말투가 달라 누출을 못 잡는다(같은 질문이 0.07). 사실 단위로 비교한다.
+    """
+    hits = []
+    for f in fewshot:
+        for fm in f["must"]:
+            fsec = set(sections_in(fm["source"]))
+            if not fsec:
+                continue
+            for e in evalset:
+                for em in e["must"]:
+                    if not fsec & set(sections_in(em["source"])):
+                        continue
+                    a, b = _bigrams(fm["fact"]), _bigrams(em["fact"])
+                    score = len(a & b) / max(1, len(a | b))
+                    if score >= threshold:
+                        hits.append((f["id"], e["id"], score, fm["fact"]))
+    return hits
+
+
 def summarize(items):
     table = Counter((it["route"], it["action"]) for it in items)
     print(f"{'route':<17}" + "".join(f"{a:>14}" for a in ACTIONS) + f"{'합':>6}")
@@ -115,6 +142,7 @@ def summarize(items):
 def main():
     files = sys.argv[1:] or sorted(str(p) for p in (ROOT / "data").glob("goldenset*.json"))
     failed = False
+    by_split = {}
     for f in files:
         items = json.loads(Path(f).read_text(encoding="utf-8"))["items"]
         print(f"\n== {Path(f).name} ({len(items)}건)")
@@ -124,6 +152,16 @@ def main():
             print("  ✗", e)
         print("  통과" if not errors else f"  오류 {len(errors)}건")
         failed |= bool(errors)
+        for it in items:
+            by_split.setdefault(it["split"], []).append(it)
+
+    if "fewshot" in by_split and "eval" in by_split:
+        hits = shared_facts(by_split["fewshot"], by_split["eval"])
+        print(f"\n== 예시용↔평가용 사실 공유 (같은 조항, 문장 bigram 유사도 ≥ 0.5)")
+        for fid, eid, score, fact in hits:
+            print(f"  ✗ {fid} ~ {eid} {score:.2f}  {fact}")
+        print("  통과" if not hits else f"  공유 {len(hits)}건")
+        failed |= bool(hits)
     sys.exit(1 if failed else 0)
 
 
