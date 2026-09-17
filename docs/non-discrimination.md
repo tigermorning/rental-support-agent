@@ -1,6 +1,6 @@
 # 차별금지 가이드라인
 
-<!-- 원본: korea-direct-rental@d82a5cc src/lib/legal (slug: non-discrimination). 직접 고치지 말고 scripts/export_docs.mjs 로 다시 추출 -->
+<!-- 원본: korea-direct-rental@0895a0a src/lib/legal (slug: non-discrimination). 직접 고치지 말고 scripts/export_docs.mjs 로 다시 추출 -->
 
 시행일: 2026년 9월 13일
 
