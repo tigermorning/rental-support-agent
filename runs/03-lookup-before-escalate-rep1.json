@@ -1,0 +1,2791 @@
+{
+ "tag": "03-lookup-before-escalate-rep1",
+ "split": "eval",
+ "summary": {
+  "router": {
+   "acc": 1.0,
+   "macro_f1": 1.0,
+   "n": 42,
+   "misrouted": []
+  },
+  "answers": {
+   "tool": 0.8809523809523809,
+   "answer": 0.7380952380952381,
+   "both": 0.7142857142857143,
+   "action": 0.9285714285714286,
+   "n": 42
+  }
+ },
+ "results": [
+  {
+   "id": "E-001",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.99,
+    "reason": "서비스가 중개 서비스인지와 계약 성사 시 중개수수료 부담 여부를 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_service_scope"
+    ],
+    "sections": [
+     "약관 1조",
+     "약관 2조",
+     "약관 3조",
+     "약관 11조"
+    ],
+    "answer": "저희는 공인중개사가 아니며, 임대차 중개행위를 제공하지 않는 직거래 플랫폼입니다. 계약 성사를 조건으로 중개보수를 받지 않으므로 복비를 몇 퍼센트 내는 구조가 아닙니다. 임대차계약은 임대인과 임차인 사이에서 서비스 외부에서 직접 체결됩니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "저희는 공인중개사가 아니며, 임대차 중개행위를 제공하지 않는 직거래 플랫폼입니다. 계약 성사를 조건으로 중개보수를 받지 않으므로 복비를 몇 퍼센트 내는 구조가 아닙니다. 임대차계약은 임대인과 임차인 사이에서 서비스 외부에서 직접 체결됩니다.",
+      "tools": [
+       "get_service_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "현재 서비스는 무료로 제공된다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "저희는 공인중개사가 아니며, 임대차 중개행위를 제공하지 않는 직거래 플랫폼입니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "계약 성사를 조건으로 중개보수를 받지 않으므로"
+      },
+      {
+       "index": 2,
+       "covered": false,
+       "evidence": "없음"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-002",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.99,
+    "reason": "계약서 작성·계약 대행이 서비스에서 제공되는지에 관한 문의이므로 SCOPE에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_service_scope"
+    ],
+    "sections": [
+     "약관 1조",
+     "약관 2조",
+     "약관 3조",
+     "약관 11조"
+    ],
+    "answer": "저희는 임대차계약의 체결을 대행하거나 계약서를 작성해 드리지 않습니다. 계약은 임대인과 임차인 사이에서 서비스 외부에서 직접 체결하셔야 합니다. 계약서 양식 작성 여부와 방식도 당사자 간에 직접 정하셔야 합니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "저희는 임대차계약의 체결을 대행하거나 계약서를 작성해 드리지 않습니다. 계약은 임대인과 임차인 사이에서 서비스 외부에서 직접 체결하셔야 합니다. 계약서 양식 작성 여부와 방식도 당사자 간에 직접 정하셔야 합니다.",
+      "tools": [
+       "get_service_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "저희는 임대차계약의 체결을 대행하거나 계약서를 작성해 드리지 않습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "계약은 임대인과 임차인 사이에서 서비스 외부에서 직접 체결하셔야 합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-003",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.98,
+    "reason": "보증금 반환 지연에 대해 플랫폼의 책임과 분쟁·손해 책임을 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_liability_disputes"
+    ],
+    "sections": [
+     "약관 12조",
+     "약관 13조",
+     "가이드라인 7항"
+    ],
+    "answer": "회사는 임대차계약의 당사자가 아니므로 계약 이행이나 보증금 반환 분쟁에 관여하거나 대신 받아드릴 수 없습니다. 등록 정보의 정확성에 대한 1차적 책임은 해당 임대인에게 있으며, 회사는 서비스 운영자로서 필요한 주의를 다합니다. 보증금 반환과 관련한 임대차 분쟁은 주택임대차분쟁조정위원회의 조정 절차를 이용하실 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "회사는 임대차계약의 당사자가 아니므로 계약 이행이나 보증금 반환 분쟁에 관여하거나 대신 받아드릴 수 없습니다. 등록 정보의 정확성에 대한 1차적 책임은 해당 임대인에게 있으며, 회사는 서비스 운영자로서 필요한 주의를 다합니다. 보증금 반환과 관련한 임대차 분쟁은 주택임대차분쟁조정위원회의 조정 절차를 이용하실 수 있습니다.",
+      "tools": [
+       "get_liability_disputes"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "회사의 고의 또는 과실이 없는 한 이용자 간 거래로 생긴 손해에 책임지지 않는다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "회사는 임대차계약의 당사자가 아니므로 계약 이행이나 보증금 반환 분쟁에 관여하거나 대신 받아드릴 수 없습니다."
+      },
+      {
+       "index": 1,
+       "covered": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "보증금 반환과 관련한 임대차 분쟁은 주택임대차분쟁조정위원회의 조정 절차를 이용하실 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-004",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.58,
+    "reason": "매물 정보가 틀린 상황에서 플랫폼의 책임 여부를 묻는 문의로, 서비스 책임과 거래 정보 확인 책임에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_liability_disputes"
+    ],
+    "sections": [
+     "약관 12조",
+     "약관 13조",
+     "가이드라인 7항"
+    ],
+    "answer": "등록된 매물 정보의 정확성에 대한 1차적 책임은 해당 정보를 직접 등록한 임대인에게 있습니다. 플랫폼은 허위매물 신고 처리와 매물 등록 기준 운영 등 서비스 운영자로서 필요한 주의를 다합니다. 다만 플랫폼은 임대차계약의 당사자가 아니므로 계약이나 그로 인한 이용자 간 분쟁에 관여하지 않습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "등록된 매물 정보의 정확성에 대한 1차적 책임은 해당 정보를 직접 등록한 임대인에게 있습니다. 플랫폼은 허위매물 신고 처리와 매물 등록 기준 운영 등 서비스 운영자로서 필요한 주의를 다합니다. 다만 플랫폼은 임대차계약의 당사자가 아니므로 계약이나 그로 인한 이용자 간 분쟁에 관여하지 않습니다.",
+      "tools": [
+       "get_liability_disputes"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "등록된 매물 정보의 정확성에 대한 1차적 책임은 해당 정보를 직접 등록한 임대인에게 있습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "플랫폼은 허위매물 신고 처리와 매물 등록 기준 운영 등 서비스 운영자로서 필요한 주의를 다합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-005",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.99,
+    "reason": "서비스 이용 가능 지역(수원 포함 여부)과 이용 요금은 서비스의 범위·요금에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_service_scope"
+    ],
+    "sections": [
+     "약관 1조",
+     "약관 2조",
+     "약관 3조",
+     "약관 11조"
+    ],
+    "answer": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계입니다. 따라서 수원 지역 원룸 제공 여부는 안내 자료에서 확인되지 않습니다. 현재 서비스는 무료이며, 유료 기능을 도입할 경우 사전에 별도로 공지하고 동의를 받습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계입니다. 따라서 수원 지역 원룸 제공 여부는 안내 자료에서 확인되지 않습니다. 현재 서비스는 무료이며, 유료 기능을 도입할 경우 사전에 별도로 공지하고 동의를 받습니다.",
+      "tools": [
+       "get_service_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계입니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "현재 서비스는 무료이며"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "유료 기능을 도입할 경우 사전에 별도로 공지하고 동의를 받습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-006",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.98,
+    "reason": "직거래에서 집주인의 세금 체납이나 근저당 등 권리관계를 서비스가 확인해 주는지와 그 책임 범위를 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_liability_disputes"
+    ],
+    "sections": [
+     "약관 12조",
+     "약관 13조",
+     "가이드라인 7항"
+    ],
+    "answer": "저희는 임대차계약의 당사자가 아니며, 집주인의 세금 체납 여부나 근저당 등 권리관계를 대신 확인해 드리지는 않습니다. 계약 전 등기사항증명서로 소유자와 선순위 권리관계를 직접 확인하시고, 임대인의 세금 체납 여부와 보증사고 이력도 확인해 주셔야 합니다. 이는 이용약관 12조에 따른 이용자 확인 사항입니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "저희는 임대차계약의 당사자가 아니며, 집주인의 세금 체납 여부나 근저당 등 권리관계를 대신 확인해 드리지는 않습니다. 계약 전 등기사항증명서로 소유자와 선순위 권리관계를 직접 확인하시고, 임대인의 세금 체납 여부와 보증사고 이력도 확인해 주셔야 합니다. 이는 이용약관 12조에 따른 이용자 확인 사항입니다.",
+      "tools": [
+       "get_liability_disputes"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "계약 전 등기사항증명서로 소유자와 선순위 권리관계를 직접 확인하시고"
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "임대인의 세금 체납 여부와 보증사고 이력도 확인해 주셔야 합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-007",
+   "out": {
+    "route": "SCOPE",
+    "confidence": 0.98,
+    "reason": "서비스 지역의 확대 시점과 파일럿 운영 범위에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_service_scope",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 1조",
+     "약관 2조",
+     "약관 3조",
+     "약관 11조"
+    ],
+    "answer": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계이며, 무료로 제공됩니다. 다른 자치구로 확대되는 일정은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계이며, 무료로 제공됩니다. 다른 자치구로 확대되는 일정은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_service_scope",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "현재 서비스는 서울특별시 관악구·마포구를 대상으로 하는 파일럿 단계"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-008",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.98,
+    "reason": "가입·로그인 방식과 비밀번호의 저장 여부에 관한 계정 및 개인정보 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_account_rules"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "비밀번호를 만드는 방식이 아니라, 이메일 주소로 발송되는 로그인 링크를 통해 가입하고 로그인하는 방식입니다. 안내 자료에는 비밀번호를 저장한다는 내용은 확인되지 않습니다. 이메일 계정은 본인만 사용해야 하며, 도용 사실을 알게 되면 즉시 회사에 알려야 합니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "비밀번호를 만드는 방식이 아니라, 이메일 주소로 발송되는 로그인 링크를 통해 가입하고 로그인하는 방식입니다. 안내 자료에는 비밀번호를 저장한다는 내용은 확인되지 않습니다. 이메일 계정은 본인만 사용해야 하며, 도용 사실을 알게 되면 즉시 회사에 알려야 합니다.",
+      "tools": [
+       "get_account_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": false,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "비밀번호를 저장하지 않는다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "이메일 주소로 발송되는 로그인 링크를 통해 가입하고 로그인하는 방식입니다."
+      },
+      {
+       "index": 1,
+       "covered": false,
+       "evidence": "안내 자료에는 비밀번호를 저장한다는 내용은 확인되지 않습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-009",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.96,
+    "reason": "만 17세 이용자의 가입 가능 여부를 묻는 문의로, 가입 조건과 계정 이용 자격에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_account_rules"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "회원가입은 원칙적으로 만 19세 이상인 분이 할 수 있습니다. 다만 미성년자는 법정대리인의 동의가 있는 경우 이용할 수 있습니다. 가입은 이메일로 발송되는 로그인 링크를 통해 진행되며, 가입 시 임대인 또는 임차인 역할을 선택합니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "회원가입은 원칙적으로 만 19세 이상인 분이 할 수 있습니다. 다만 미성년자는 법정대리인의 동의가 있는 경우 이용할 수 있습니다. 가입은 이메일로 발송되는 로그인 링크를 통해 진행되며, 가입 시 임대인 또는 임차인 역할을 선택합니다.",
+      "tools": [
+       "get_account_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "회원가입은 원칙적으로 만 19세 이상인 분이 할 수 있습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "미성년자는 법정대리인의 동의가 있는 경우 이용할 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-010",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.98,
+    "reason": "탈퇴 시 본인이 보낸 메시지의 삭제 여부와 개인정보·데이터 보유 및 파기 정책을 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_account_rules",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "회원 탈퇴를 요청하면 관련 법령상 보존 의무가 있는 정보를 제외하고 개인정보는 지체 없이 파기합니다. 다만 집주인에게 보낸 메시지가 탈퇴와 함께 모두 삭제되는지는 안내 자료에 없습니다. 해당 내용은 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "회원 탈퇴를 요청하면 관련 법령상 보존 의무가 있는 정보를 제외하고 개인정보는 지체 없이 파기합니다. 다만 집주인에게 보낸 메시지가 탈퇴와 함께 모두 삭제되는지는 안내 자료에 없습니다. 해당 내용은 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_account_rules",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": false,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "상대방에게 이미 전달된 메시지는 상대방의 이용 기록으로서 상대방의 보유 기간에 따른다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "회원 탈퇴를 요청하면 관련 법령상 보존 의무가 있는 정보를 제외하고 개인정보는 지체 없이 파기합니다."
+      },
+      {
+       "index": 1,
+       "covered": false,
+       "evidence": "없음"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-011",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.92,
+    "reason": "약관 변경 시 사전 고지와 변경에 동의하지 않을 때의 조치에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_account_rules"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "약관이 변경되면 적용일 7일 전부터 서비스 화면에 공지합니다. 이용자에게 불리한 변경은 적용일 30일 전부터 공지합니다. 변경된 약관에 동의하지 않으시면 서비스 이용을 중단하고 회원 탈퇴를 요청하실 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "약관이 변경되면 적용일 7일 전부터 서비스 화면에 공지합니다. 이용자에게 불리한 변경은 적용일 30일 전부터 공지합니다. 변경된 약관에 동의하지 않으시면 서비스 이용을 중단하고 회원 탈퇴를 요청하실 수 있습니다.",
+      "tools": [
+       "get_account_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "약관이 변경되면 적용일 7일 전부터 서비스 화면에 공지합니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "이용자에게 불리한 변경은 적용일 30일 전부터 공지합니다."
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "변경된 약관에 동의하지 않으시면 서비스 이용을 중단하고 회원 탈퇴를 요청하실 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-012",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.98,
+    "reason": "외국인등록번호 등 가입 시 수집 정보와 개인정보가 저장되는 서버 위치를 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_data_handling",
+     "get_privacy_safeguards"
+    ],
+    "sections": [
+     "처리방침 1항",
+     "처리방침 2항",
+     "처리방침 3항",
+     "처리방침 6항",
+     "처리방침 4항",
+     "처리방침 5항",
+     "처리방침 8항",
+     "처리방침 9항",
+     "처리방침 10항",
+     "처리방침 11항",
+     "처리방침 12항"
+    ],
+    "answer": "외국인등록번호는 수집하지 않으므로 가입 시 입력하실 필요가 없습니다. 처리방침 2항에 따라 외국인등록번호를 포함한 고유식별정보는 수집하지 않습니다. 개인정보 데이터베이스 보관과 회원 인증, 파일 저장은 대한민국의 AWS 서울 리전에 위치한 Supabase에서 처리됩니다. 웹 서비스 호스팅 리전은 서비스 구성에 따라 정해지며, 안내 자료에는 오픈 전 확인 후 기재한다고 되어 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "외국인등록번호는 수집하지 않으므로 가입 시 입력하실 필요가 없습니다. 처리방침 2항에 따라 외국인등록번호를 포함한 고유식별정보는 수집하지 않습니다. 개인정보 데이터베이스 보관과 회원 인증, 파일 저장은 대한민국의 AWS 서울 리전에 위치한 Supabase에서 처리됩니다. 웹 서비스 호스팅 리전은 서비스 구성에 따라 정해지며, 안내 자료에는 오픈 전 확인 후 기재한다고 되어 있습니다.",
+      "tools": [
+       "get_data_handling",
+       "get_privacy_safeguards"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "웹 호스팅은 Vercel에 위탁하며 그 처리 위치는 아직 확정·기재되지 않았다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "외국인등록번호를 포함한 고유식별정보는 수집하지 않습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "개인정보 데이터베이스 보관과 회원 인증, 파일 저장은 대한민국의 AWS 서울 리전에 위치한 Supabase에서 처리됩니다."
+      },
+      {
+       "index": 2,
+       "covered": false,
+       "evidence": "웹 서비스 호스팅 리전은 서비스 구성에 따라 정해지며, 안내 자료에는 오픈 전 확인 후 기재한다고 되어 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-013",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.99,
+    "reason": "개인정보 삭제 요청과 이를 접수할 담당자 연락처를 묻는 문의이므로 계정·개인정보 라우트입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_account_rules",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "개인정보 삭제 요구는 언제든지 할 수 있으며, 요청을 받은 날부터 10일 이내에 조치하고 결과를 통지합니다. 서비스 내에서 직접 매물을 삭제하거나 회원 탈퇴를 요청하는 방법으로도 삭제를 요구할 수 있습니다. 담당자 이메일이나 전화번호는 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "개인정보 삭제 요구는 언제든지 할 수 있으며, 요청을 받은 날부터 10일 이내에 조치하고 결과를 통지합니다. 서비스 내에서 직접 매물을 삭제하거나 회원 탈퇴를 요청하는 방법으로도 삭제를 요구할 수 있습니다. 담당자 이메일이나 전화번호는 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_account_rules",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "요청을 받은 날부터 10일 이내에 조치하고 결과를 통지합니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "서비스 내에서 직접 매물을 삭제하거나 회원 탈퇴를 요청하는 방법으로도 삭제를 요구할 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-014",
+   "out": {
+    "route": "ACCOUNT_PRIVACY",
+    "confidence": 0.99,
+    "reason": "본인이 생성하지 않은 인터뷰 신청과 이메일 계정 무단 로그인 의심 등 계정 도용·보안 문제에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_account_rules",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 4조",
+     "약관 5조",
+     "처리방침 7항"
+    ],
+    "answer": "이메일 로그인 링크로 가입·로그인이 이루어지며, 본인의 이메일 계정을 제3자가 사용하도록 허용해서는 안 됩니다. 계정 도용 사실을 알게 된 경우에는 즉시 회사에 통지하도록 되어 있습니다. 말씀하신 인터뷰 신청과 로그인 여부는 계정 상태 확인이 필요해 운영자에게 전달했습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "이메일 로그인 링크로 가입·로그인이 이루어지며, 본인의 이메일 계정을 제3자가 사용하도록 허용해서는 안 됩니다. 계정 도용 사실을 알게 된 경우에는 즉시 회사에 통지하도록 되어 있습니다. 말씀하신 인터뷰 신청과 로그인 여부는 계정 상태 확인이 필요해 운영자에게 전달했습니다.",
+      "tools": [
+       "get_account_rules",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "이메일 로그인 링크로 가입·로그인이 이루어지며"
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "계정 도용 사실을 알게 된 경우에는 즉시 회사에 통지하도록 되어 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-015",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.98,
+    "reason": "부모님 명의의 주택을 본인이 대신 매물로 등록할 수 있는지 묻는 대리 등록 허용 여부에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_listing_rules"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "원칙적으로 타인의 매물을 대신 등록하는 행위는 금지됩니다. 다만 대리인으로 등록하는 경우에는 위임장과 인감증명서를 제출해야 합니다. 회사가 요청하면 소유 또는 임대 권한을 확인할 수 있는 자료도 제출해 주세요.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "원칙적으로 타인의 매물을 대신 등록하는 행위는 금지됩니다. 다만 대리인으로 등록하는 경우에는 위임장과 인감증명서를 제출해야 합니다. 회사가 요청하면 소유 또는 임대 권한을 확인할 수 있는 자료도 제출해 주세요.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "본인이 소유하거나 적법한 임대 권한을 가진 주택만 등록할 수 있고 타인의 매물을 대신 등록하는 행위는 금지된다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": false,
+       "evidence": "원칙적으로 타인의 매물을 대신 등록하는 행위는 금지됩니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "대리인으로 등록하는 경우에는 위임장과 인감증명서를 제출해야 합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-016",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.98,
+    "reason": "매물 등록 시 관리비와 월세 조건을 어떻게 기재해야 하는지 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_listing_rules"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "관리비도 임대조건에 해당하므로 사실대로 기재하셔야 합니다. 월세만 적고 관리비를 비워 둔 뒤 연락 시 안내하는 방식은 약관 6조의 등록 기준에 맞지 않습니다. 관리비가 달라지는 경우에도 실제 조건을 정확히 기재해 주세요.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "관리비도 임대조건에 해당하므로 사실대로 기재하셔야 합니다. 월세만 적고 관리비를 비워 둔 뒤 연락 시 안내하는 방식은 약관 6조의 등록 기준에 맞지 않습니다. 관리비가 달라지는 경우에도 실제 조건을 정확히 기재해 주세요.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "주소·면적·보증금·월세·관리비 등 임대조건을 사실대로 기재해야 한다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": false,
+       "evidence": "관리비도 임대조건에 해당하므로 사실대로 기재하셔야 합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-017",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.86,
+    "reason": "계약 후 주택임대차 신고 의무와 플랫폼에서 신고를 대행하는지 여부를 묻고 있어 매물 등록·임대차 신고 관련 문의에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_listing_rules"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "계약이 체결된 매물은 지체 없이 마감 처리해 주세요. 보증금 6천만원 초과 계약은 계약체결일로부터 30일 이내에 주택임대차 신고를 해야 합니다. 이 신고는 임대인과 임차인의 법적 의무이며, 플랫폼에서 대행하지 않습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "계약이 체결된 매물은 지체 없이 마감 처리해 주세요. 보증금 6천만원 초과 계약은 계약체결일로부터 30일 이내에 주택임대차 신고를 해야 합니다. 이 신고는 임대인과 임차인의 법적 의무이며, 플랫폼에서 대행하지 않습니다.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "보증금 6천만원 초과 또는 월세 30만원 초과면 계약체결일로부터 30일 이내에 주택임대차 신고를 해야 한다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "계약이 체결된 매물은 지체 없이 마감 처리해 주세요."
+      },
+      {
+       "index": 1,
+       "covered": false,
+       "evidence": "보증금 6천만원 초과 계약은 계약체결일로부터 30일 이내에 주택임대차 신고를 해야 합니다."
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "이 신고는 임대인과 임차인의 법적 의무이며, 플랫폼에서 대행하지 않습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-018",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.99,
+    "reason": "같은 주택을 전세와 월세 조건으로 매물 두 개로 중복 등록해도 되는지 묻는 매물 등록 기준·허용 여부 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_listing_rules",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "정확한 안내를 위해 문의 내용을 운영자에게 전달했습니다. 확인 후 안내드리겠습니다.",
+    "verify": {
+     "ok": false,
+     "violations": [
+      {
+       "type": "넘김 약속 불이행",
+       "detail": "운영자에게 전달해 확인드리"
+      }
+     ]
+    },
+    "attempts": 2,
+    "history": [
+     {
+      "answer": "동일한 주택은 둘 이상의 매물을 동시에 활성 상태로 등록할 수 없습니다. 전세 조건과 월세 조건이 다르더라도 같은 집이라면 두 건을 함께 올리시면 안 됩니다. 등록하실 때에는 보증금·월세·관리비 등 실제 임대조건을 사실대로 기재해 주세요.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": false,
+       "violations": [
+        {
+         "type": "출처 불명 숫자",
+         "detail": [
+          "2건"
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "answer": "동일한 주택은 전세와 월세 조건이 다르더라도 둘 이상의 매물을 동시에 활성 상태로 등록할 수 없습니다. 임대조건은 사실대로 기재해 하나의 매물로 등록해 주세요. 반응이 더 좋아지는지에 대해서는 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": false,
+       "violations": [
+        {
+         "type": "넘김 약속 불이행",
+         "detail": "운영자에게 전달해 확인드리"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": false,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "동일한 주택에 대해 둘 이상의 매물을 동시에 활성 상태로 등록할 수 없다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": false,
+       "evidence": "없음"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-019",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.98,
+    "reason": "매물 등록 시 소유·권한을 확인하기 위한 등기부등본 제출 의무를 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_listing_rules"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "등기사항증명서는 모든 등록 때 반드시 제출하는 것이 아니라, 회사가 요청하는 경우 소유 또는 임대 권한을 확인할 수 있는 자료로 제출해야 합니다. 등록하려는 주택은 본인이 소유하거나 적법한 임대 권한이 있어야 하며, 대리 등록 시에는 위임장과 인감증명서를 제출해야 합니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "등기사항증명서는 모든 등록 때 반드시 제출하는 것이 아니라, 회사가 요청하는 경우 소유 또는 임대 권한을 확인할 수 있는 자료로 제출해야 합니다. 등록하려는 주택은 본인이 소유하거나 적법한 임대 권한이 있어야 하며, 대리 등록 시에는 위임장과 인감증명서를 제출해야 합니다.",
+      "tools": [
+       "get_listing_rules"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "회사가 요청하는 경우 소유 또는 임대 권한을 확인할 수 있는 자료로 제출해야 합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-020",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.98,
+    "reason": "매물 등록 시 사진·영상 업로드 가능 여부와 개수 제한을 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_listing_rules",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 6조"
+    ],
+    "answer": "사진은 실제 매물과 다른 사진을 게시해서는 안 됩니다. 다만 사진의 최대 등록 장수와 짧은 영상 등록 가능 여부는 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "사진은 실제 매물과 다른 사진을 게시해서는 안 됩니다. 다만 사진의 최대 등록 장수와 짧은 영상 등록 가능 여부는 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_listing_rules",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "사진은 실제 매물과 다른 사진을 게시해서는 안 됩니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-021",
+   "out": {
+    "route": "LISTING",
+    "confidence": 0.97,
+    "reason": "소유 확인 서류 제출 후 매물 검토 및 등록 상태를 확인하는 문의로, 매물 등록·검증 절차에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "escalate_to_operator"
+    ],
+    "sections": [],
+    "answer": "매물의 소유 확인 서류 검토 및 현재 상태는 제가 직접 조회할 수 없어 운영자에게 전달했습니다. 확인 후 안내드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "매물의 소유 확인 서류 검토 및 현재 상태는 제가 직접 조회할 수 없어 운영자에게 전달했습니다. 확인 후 안내드리겠습니다.",
+      "tools": [
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "매물의 소유 확인 서류 검토 및 현재 상태는 제가 직접 조회할 수 없어 운영자에게 전달했습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-022",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.98,
+    "reason": "면담 중 임차인에게 결혼 여부를 질문해도 되는지 묻는 것으로, 방문·면담 시 허용되는 질문과 차별 기준에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_rejection_and_conduct",
+     "get_tenant_info_scope"
+    ],
+    "sections": [
+     "가이드라인 4항",
+     "가이드라인 5항",
+     "약관 7조",
+     "가이드라인 1항",
+     "가이드라인 2항",
+     "가이드라인 3항"
+    ],
+    "answer": "혼인 여부는 재정능력과 무관한 정보이므로 면담이나 서비스 내 메시지에서 물어보시면 안 됩니다. 임차인 선정은 임대료를 지속적으로 지급할 수 있는 능력만을 기준으로 해야 하며, 열람 가능한 정보도 고용상태·소득구간·보증인 유무로 한정됩니다. 혼인 여부를 요구하는 행위는 이용약관 제9조 위반에 따른 제재 대상이 될 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "혼인 여부는 재정능력과 무관한 정보이므로 면담이나 서비스 내 메시지에서 물어보시면 안 됩니다. 임차인 선정은 임대료를 지속적으로 지급할 수 있는 능력만을 기준으로 해야 하며, 열람 가능한 정보도 고용상태·소득구간·보증인 유무로 한정됩니다. 혼인 여부를 요구하는 행위는 이용약관 제9조 위반에 따른 제재 대상이 될 수 있습니다.",
+      "tools": [
+       "get_rejection_and_conduct",
+       "get_tenant_info_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "임차인 선정은 임대료를 지속적으로 지급할 수 있는 능력만을 기준으로 해야 합니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "혼인 여부는 재정능력과 무관한 정보이므로"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "면담이나 서비스 내 메시지에서 물어보시면 안 됩니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-023",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.99,
+    "reason": "방문 신청 후 임대인에게 이름과 연락처가 언제·어느 범위로 공개되는지 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_tenant_info_scope"
+    ],
+    "sections": [
+     "약관 7조",
+     "가이드라인 1항",
+     "가이드라인 2항",
+     "가이드라인 3항"
+    ],
+    "answer": "방문 신청만으로는 집주인이 회원님의 이름·이메일·연락처를 볼 수 없습니다. 인터뷰가 확정되기 전에는 서비스 내 메시지로만 소통하며, 임대인이 볼 수 있는 정보도 고용상태·소득구간·보증인 유무로 한정됩니다. 인터뷰가 확정된 후에만 서로의 연락처가 공개됩니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "방문 신청만으로는 집주인이 회원님의 이름·이메일·연락처를 볼 수 없습니다. 인터뷰가 확정되기 전에는 서비스 내 메시지로만 소통하며, 임대인이 볼 수 있는 정보도 고용상태·소득구간·보증인 유무로 한정됩니다. 인터뷰가 확정된 후에만 서로의 연락처가 공개됩니다.",
+      "tools": [
+       "get_tenant_info_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "인터뷰가 확정되기 전에는 서비스 내 메시지로만 소통하며... 이름·이메일·연락처를 볼 수 없습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "임대인이 볼 수 있는 정보도 고용상태·소득구간·보증인 유무로 한정됩니다."
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "인터뷰가 확정된 후에만 서로의 연락처가 공개됩니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-024",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.98,
+    "reason": "임차인의 소득 정보가 어느 범위까지 공개되는지 묻는 문의로, 임대인이 볼 수 있는 임차인 정보에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_tenant_info_scope"
+    ],
+    "sections": [
+     "약관 7조",
+     "가이드라인 1항",
+     "가이드라인 2항",
+     "가이드라인 3항"
+    ],
+    "answer": "정확한 연봉은 제공되지 않으며, 임대인이 볼 수 있는 재정능력 정보는 고용상태·월 임대료 대비 소득구간·보증인 유무뿐입니다. 소득구간은 월 임대료의 2배 미만, 2~3배, 3배 이상으로 표시됩니다. 임차인 판단은 임대료를 지속적으로 지급할 수 있는 능력을 기준으로 하도록 정해져 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "정확한 연봉은 제공되지 않으며, 임대인이 볼 수 있는 재정능력 정보는 고용상태·월 임대료 대비 소득구간·보증인 유무뿐입니다. 소득구간은 월 임대료의 2배 미만, 2~3배, 3배 이상으로 표시됩니다. 임차인 판단은 임대료를 지속적으로 지급할 수 있는 능력을 기준으로 하도록 정해져 있습니다.",
+      "tools": [
+       "get_tenant_info_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "임대인이 볼 수 있는 재정능력 정보는 고용상태·월 임대료 대비 소득구간·보증인 유무뿐입니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "소득구간은 월 임대료의 2배 미만, 2~3배, 3배 이상으로 표시됩니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-025",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.97,
+    "reason": "신청자 거절 사유와 거절 과정에서 제공되는 선택지를 묻는 문의로, 방문·면담 및 신청자 인터뷰 관련 기준에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_rejection_and_conduct"
+    ],
+    "sections": [
+     "가이드라인 4항",
+     "가이드라인 5항"
+    ],
+    "answer": "직접 사유를 입력하는 칸은 제공되지 않으며, 다음 다섯 가지 중에서만 선택할 수 있습니다. 일정 불가, 이미 계약 완료, 재정조건 불충족, 매물 회수, 기타(재정 관련 사유)입니다.  \n‘기타’도 다른 사유 전반이 아니라 위 항목에 해당하지 않는 재정능력 관련 사유에만 사용할 수 있습니다. 임차인은 선택된 거절 사유를 확인할 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "직접 사유를 입력하는 칸은 제공되지 않으며, 다음 다섯 가지 중에서만 선택할 수 있습니다. 일정 불가, 이미 계약 완료, 재정조건 불충족, 매물 회수, 기타(재정 관련 사유)입니다.  \n‘기타’도 다른 사유 전반이 아니라 위 항목에 해당하지 않는 재정능력 관련 사유에만 사용할 수 있습니다. 임차인은 선택된 거절 사유를 확인할 수 있습니다.",
+      "tools": [
+       "get_rejection_and_conduct"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "다음 다섯 가지 중에서만 선택할 수 있습니다. 일정 불가, 이미 계약 완료, 재정조건 불충족, 매물 회수, 기타(재정 관련 사유)입니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "직접 사유를 입력하는 칸은 제공되지 않으며"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "임차인은 선택된 거절 사유를 확인할 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-026",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.97,
+    "reason": "방문·면담 신청이 거절된 구체적인 사유를 확인할 수 있는지 묻는 문의이므로 INTERVIEW에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_rejection_and_conduct",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "가이드라인 4항",
+     "가이드라인 5항"
+    ],
+    "answer": "‘기타’는 다른 항목에 해당하지 않는 재정능력 관련 사유를 뜻합니다. 임대인이 사유를 자유롭게 작성하는 입력란은 제공되지 않으므로, 집주인이 별도로 적은 구체적 문구를 확인하는 방식은 안내 자료에서 확인되지 않습니다. 다만 분쟁이 발생하면 신청 시점의 재정정보 사본을 바탕으로 판단 근거를 확인할 수 있습니다. 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "‘기타’는 다른 항목에 해당하지 않는 재정능력 관련 사유를 뜻합니다. 임대인이 사유를 자유롭게 작성하는 입력란은 제공되지 않으므로, 집주인이 별도로 적은 구체적 문구를 확인하는 방식은 안내 자료에서 확인되지 않습니다. 다만 분쟁이 발생하면 신청 시점의 재정정보 사본을 바탕으로 판단 근거를 확인할 수 있습니다. 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_rejection_and_conduct",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": false,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "‘기타’는 다른 항목에 해당하지 않는 재정능력 관련 사유를 뜻합니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "임대인이 사유를 자유롭게 작성하는 입력란은 제공되지 않으므로, 집주인이 별도로 적은 구체적 문구를 확인하는 방식은 안내 자료에서 확인되지 않습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-027",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.9,
+    "reason": "신청 과정에서 국적을 기재해야 하는지와 국적을 이유로 평가·거절될 수 있는지에 관한 문의로, 임차인에게 요구하거나 확인할 수 있는 정보 기준에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_tenant_info_scope"
+    ],
+    "sections": [
+     "약관 7조",
+     "가이드라인 1항",
+     "가이드라인 2항",
+     "가이드라인 3항"
+    ],
+    "answer": "국적은 서비스가 수집하지 않는 정보이며, 신청 과정에 입력 항목도 없습니다. 임대인이 신청 검토 시 볼 수 있는 정보는 고용상태, 소득구간, 보증인 유무뿐입니다. 임차인 선정은 임대료를 지속적으로 지급할 수 있는 능력만을 기준으로 하며, 국적은 판단 근거가 될 수 없습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "국적은 서비스가 수집하지 않는 정보이며, 신청 과정에 입력 항목도 없습니다. 임대인이 신청 검토 시 볼 수 있는 정보는 고용상태, 소득구간, 보증인 유무뿐입니다. 임차인 선정은 임대료를 지속적으로 지급할 수 있는 능력만을 기준으로 하며, 국적은 판단 근거가 될 수 없습니다.",
+      "tools": [
+       "get_tenant_info_scope"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "국적·출신 지역·민족은 서비스가 수집하지 않으며 입력할 칸이 없다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": false,
+       "evidence": "국적은 서비스가 수집하지 않는 정보이며, 신청 과정에 입력 항목도 없습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "임대인이 신청 검토 시 볼 수 있는 정보는 고용상태, 소득구간, 보증인 유무뿐입니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-028",
+   "out": {
+    "route": "INTERVIEW",
+    "confidence": 0.94,
+    "reason": "방문 신청의 대기 상태와 집주인이 신청 내용을 확인했는지에 대한 문의로, 방문·인터뷰 진행 및 상태 확인에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "escalate_to_operator"
+    ],
+    "sections": [],
+    "answer": "방문 신청의 진행 상태와 임대인의 열람 여부는 운영자 확인이 필요한 사항입니다. 문의 내용을 운영자에게 전달했으며, 확인 후 안내드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "방문 신청의 진행 상태와 임대인의 열람 여부는 운영자 확인이 필요한 사항입니다. 문의 내용을 운영자에게 전달했으며, 확인 후 안내드리겠습니다.",
+      "tools": [
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "방문 신청의 진행 상태와 임대인의 열람 여부는 운영자 확인이 필요한 사항입니다. 문의 내용을 운영자에게 전달했으며"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-029",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.98,
+    "reason": "집을 보기도 전에 가계약금 송금을 요구받은 사례로, 사기·금지행위 의심 및 신고 대상 여부에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_prohibited_acts"
+    ],
+    "sections": [
+     "약관 8조",
+     "약관 9조"
+    ],
+    "answer": "방문·계약 전에 계약금 등 금전의 송금을 요구하는 행위는 이용약관 9조에서 금지하고 있습니다. 회사는 서비스 내에서 어떠한 금전도 수취하거나 중개하지 않으므로, 송금 요구에는 응하지 마시고 해당 매물을 신고해 주세요.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "방문·계약 전에 계약금 등 금전의 송금을 요구하는 행위는 이용약관 9조에서 금지하고 있습니다. 회사는 서비스 내에서 어떠한 금전도 수취하거나 중개하지 않으므로, 송금 요구에는 응하지 마시고 해당 매물을 신고해 주세요.",
+      "tools": [
+       "get_prohibited_acts"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "방문·계약 전에 계약금 등 금전의 송금을 요구하는 행위는 이용약관 9조에서 금지하고 있습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "회사는 서비스 내에서 어떠한 금전도 수취하거나 중개하지 않으므로"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "송금 요구에는 응하지 마시고 해당 매물을 신고해 주세요."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-030",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "면담 중 차별성 질문을 받고 거절당한 피해를 신고하려 하며, 신고 처리 절차와 신고자 보호 여부를 묻고 있다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_report_process"
+    ],
+    "sections": [
+     "약관 10조",
+     "가이드라인 6항"
+    ],
+    "answer": "아이 유무나 나이 같은 정보를 요구받은 경우, 해당 인터뷰 신청 건에서 차별 관련 신고를 하실 수 있습니다. 신고가 접수되면 회사는 메시지 기록, 거절 사유, 신청 시점의 재정정보를 확인해 사실관계를 판단합니다. 확인 전에도 이용자 보호를 위해 해당 매물이 임시 비공개될 수 있고, 위반이 확인되면 경고·매물 게시 제한·이용 정지·이용계약 해지 조치가 가능합니다. 처리 과정에서 신고자님의 신원은 피신고인에게 알리지 않습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "아이 유무나 나이 같은 정보를 요구받은 경우, 해당 인터뷰 신청 건에서 차별 관련 신고를 하실 수 있습니다. 신고가 접수되면 회사는 메시지 기록, 거절 사유, 신청 시점의 재정정보를 확인해 사실관계를 판단합니다. 확인 전에도 이용자 보호를 위해 해당 매물이 임시 비공개될 수 있고, 위반이 확인되면 경고·매물 게시 제한·이용 정지·이용계약 해지 조치가 가능합니다. 처리 과정에서 신고자님의 신원은 피신고인에게 알리지 않습니다.",
+      "tools": [
+       "get_report_process"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 인터뷰 신청 건에서 차별 관련 신고를 하실 수 있습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "회사는 메시지 기록, 거절 사유, 신청 시점의 재정정보를 확인해 사실관계를 판단합니다."
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "처리 과정에서 신고자님의 신원은 피신고인에게 알리지 않습니다."
+      },
+      {
+       "index": 3,
+       "covered": true,
+       "evidence": "위반이 확인되면 경고·매물 게시 제한·이용 정지·이용계약 해지 조치가 가능합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-031",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "다른 사이트의 사진을 복제한 것으로 의심되는 허위·위반 매물에 대한 신고와 제재(매물 즉시 삭제 여부)를 묻고 있다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_report_process"
+    ],
+    "sections": [
+     "약관 10조",
+     "가이드라인 6항"
+    ],
+    "answer": "허위매물이나 사기 의심 행위는 신고하실 수 있습니다. 신고가 접수되면 사실관계를 확인하며, 확인 전에도 이용자 보호를 위해 해당 매물을 임시 비공개 처리할 수 있습니다. 따라서 신고 즉시 반드시 내려간다고 정해져 있지는 않습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "허위매물이나 사기 의심 행위는 신고하실 수 있습니다. 신고가 접수되면 사실관계를 확인하며, 확인 전에도 이용자 보호를 위해 해당 매물을 임시 비공개 처리할 수 있습니다. 따라서 신고 즉시 반드시 내려간다고 정해져 있지는 않습니다.",
+      "tools": [
+       "get_report_process"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "허위매물이나 사기 의심 행위는 신고하실 수 있습니다."
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "신고가 접수되면 사실관계를 확인하며"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "확인 전에도 이용자 보호를 위해 해당 매물을 임시 비공개 처리할 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-032",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "나이로 인한 차별을 당한 상황에서 손해배상 소송 등 구제 방법과 신고·지원 절차를 묻고 있다.",
+    "decision": "HANDLE",
+    "action": "ANSWER",
+    "tools": [
+     "get_liability_disputes"
+    ],
+    "sections": [
+     "약관 12조",
+     "약관 13조",
+     "가이드라인 7항"
+    ],
+    "answer": "회사는 손해배상이나 계약 강제 같은 사법상 구제를 제공하거나 대행하지 않습니다. 나이를 이유로 주거시설의 공급·이용에서 차별을 받았다면 국가인권위원회에 진정을 제기할 수 있으며, 연락처는 국번없이 1331, 홈페이지는 humanrights.go.kr입니다. 임대차 자체의 분쟁은 주택임대차분쟁조정위원회의 조정 절차를 이용할 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "회사는 손해배상이나 계약 강제 같은 사법상 구제를 제공하거나 대행하지 않습니다. 나이를 이유로 주거시설의 공급·이용에서 차별을 받았다면 국가인권위원회에 진정을 제기할 수 있으며, 연락처는 국번없이 1331, 홈페이지는 humanrights.go.kr입니다. 임대차 자체의 분쟁은 주택임대차분쟁조정위원회의 조정 절차를 이용할 수 있습니다.",
+      "tools": [
+       "get_liability_disputes"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": false,
+    "judge": {
+     "ok": false,
+     "missing": [
+      "회사는 서비스 내 제재만 할 수 있고 손해배상 등 사법상 구제를 제공하거나 대행하지 않는다",
+      "해당 인터뷰 신청 건에서 신고할 수 있다",
+      "국가인권위원회 구제는 조사와 시정권고이며 형사처벌을 수반하지 않는다"
+     ],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": false,
+       "evidence": "회사는 손해배상이나 계약 강제 같은 사법상 구제를 제공하거나 대행하지 않습니다."
+      },
+      {
+       "index": 1,
+       "covered": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "나이를 이유로 주거시설의 공급·이용에서 차별을 받았다면 국가인권위원회에 진정을 제기할 수 있으며, 연락처는 국번없이 1331"
+      },
+      {
+       "index": 3,
+       "covered": false,
+       "evidence": "없음"
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-033",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "허위매물 신고의 처리 결과와 상태를 확인하는 문의이므로 신고·제재 관련 REPORT에 해당합니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "escalate_to_operator"
+    ],
+    "sections": [],
+    "answer": "신고하신 허위매물 건의 처리 결과는 제가 직접 확인할 권한이 없어 운영자에게 전달했습니다. 확인 후 안내드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "신고하신 허위매물 건의 처리 결과는 제가 직접 확인할 권한이 없어 운영자에게 전달했습니다. 확인 후 안내드리겠습니다.",
+      "tools": [
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "처리 결과는 제가 직접 확인할 권한이 없어 운영자에게 전달했습니다. 확인 후 안내드리겠습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-034",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "차별 신고 후 처리 기간과 결과 통지 방식은 신고 처리 절차에 관한 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_report_process",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 10조",
+     "가이드라인 6항"
+    ],
+    "answer": "차별 신고는 별도 절차로 처리되며, 회사가 메시지 기록·거절 사유·신청 시점의 재정정보를 확인해 사실관계를 판단합니다. 신고 결과까지 걸리는 기간과 문자 또는 앱 알림 등 통지 방식은 안내 자료에 없습니다. 운영자에게 전달해 확인드리겠습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "차별 신고는 별도 절차로 처리되며, 회사가 메시지 기록·거절 사유·신청 시점의 재정정보를 확인해 사실관계를 판단합니다. 신고 결과까지 걸리는 기간과 문자 또는 앱 알림 등 통지 방식은 안내 자료에 없습니다. 운영자에게 전달해 확인드리겠습니다.",
+      "tools": [
+       "get_report_process",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "차별 신고는 별도 절차로 처리되며"
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "회사가 메시지 기록·거절 사유·신청 시점의 재정정보를 확인해 사실관계를 판단합니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "결과까지 걸리는 기간과 문자 또는 앱 알림 등 통지 방식은 안내 자료에 없습니다."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-035",
+   "out": {
+    "route": "REPORT",
+    "confidence": 0.99,
+    "reason": "신고 누적에 따른 계정 제재 기준과 억울한 조치에 대한 이의 제기 절차를 묻는 문의입니다.",
+    "decision": "HANDLE",
+    "action": "ESCALATE",
+    "tools": [
+     "get_report_process",
+     "escalate_to_operator"
+    ],
+    "sections": [
+     "약관 10조",
+     "가이드라인 6항"
+    ],
+    "answer": "신고가 몇 번 누적되면 계정이 정지되는지에 대한 기준은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다. 약관상 회사는 신고를 접수하면 사실관계를 확인하며, 위반 정도에 따라 경고·매물 게시 제한·일정 기간 이용 정지·이용계약 해지 조치를 할 수 있습니다. 확인 전에도 이용자 보호를 위해 해당 매물이 임시 비공개될 수 있습니다. 조치를 받으신 경우 회사에 이의를 제기할 수 있습니다.",
+    "verify": {
+     "ok": true,
+     "violations": []
+    },
+    "attempts": 1,
+    "history": [
+     {
+      "answer": "신고가 몇 번 누적되면 계정이 정지되는지에 대한 기준은 안내 자료에 없어 운영자에게 전달해 확인드리겠습니다. 약관상 회사는 신고를 접수하면 사실관계를 확인하며, 위반 정도에 따라 경고·매물 게시 제한·일정 기간 이용 정지·이용계약 해지 조치를 할 수 있습니다. 확인 전에도 이용자 보호를 위해 해당 매물이 임시 비공개될 수 있습니다. 조치를 받으신 경우 회사에 이의를 제기할 수 있습니다.",
+      "tools": [
+       "get_report_process",
+       "escalate_to_operator"
+      ],
+      "verify": {
+       "ok": true,
+       "violations": []
+      }
+     }
+    ]
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "약관상 회사는 신고를 접수하면 사실관계를 확인하며"
+      },
+      {
+       "index": 1,
+       "covered": true,
+       "evidence": "위반 정도에 따라 경고·매물 게시 제한·일정 기간 이용 정지·이용계약 해지 조치를 할 수 있습니다."
+      },
+      {
+       "index": 2,
+       "covered": true,
+       "evidence": "조치를 받으신 경우 회사에 이의를 제기할 수 있습니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 2,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-036",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "버팀목 전세자금대출 금리는 정부 지원 제도 및 금융 조건에 관한 문의로, 서비스 약관·개인정보·매물 등록·인터뷰·신고 주제와 무관합니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-037",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "관악구 신림동 원룸의 월세 시세를 묻는 문의로, 서비스 이용이나 약관·개인정보·차별·신고와 무관한 부동산 일반 정보입니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-038",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "포장이사 업체 추천과 이사 비용 견적은 서비스 약관·개인정보·매물 등록·인터뷰·신고 제재와 무관한 문의입니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-039",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "방문 일정과 관련된 날씨를 묻는 문의로, 서비스 약관·개인정보·매물 등록·인터뷰·신고와 무관합니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-040",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "청년 월세 지원은 정부 지원 제도에 관한 문의로, 서비스 약관·개인정보·매물 등록·인터뷰·신고와 무관합니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-041",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "월세 소득의 종합소득세 신고 방법은 세금 관련 문의로, 서비스 약관·개인정보·매물 등록·인터뷰·신고 제재 주제와 무관합니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      },
+      {
+       "index": 1,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E-042",
+   "out": {
+    "route": "OTHER",
+    "confidence": 0.99,
+    "reason": "공인중개사 시험 과목과 온라인 강의 추천은 서비스 약관·개인정보·차별금지와 무관한 일반적인 교육·자격시험 문의입니다.",
+    "decision": "OUT_OF_SCOPE",
+    "action": "OUT_OF_SCOPE",
+    "tools": [],
+    "sections": [],
+    "answer": "죄송하지만 해당 내용은 제가 안내해 드리는 범위가 아닙니다. 서비스 이용, 매물 등록, 방문·인터뷰, 개인정보, 신고에 관한 문의를 도와드릴 수 있습니다.",
+    "verify": null,
+    "attempts": 0,
+    "history": []
+   },
+   "score": {
+    "tool_ok": true,
+    "judge": {
+     "ok": true,
+     "missing": [],
+     "violated": [],
+     "must": [
+      {
+       "index": 0,
+       "covered": true,
+       "evidence": "해당 내용은 제가 안내해 드리는 범위가 아닙니다."
+      }
+     ],
+     "forbid": [
+      {
+       "index": 0,
+       "violated": false,
+       "evidence": "없음"
+      }
+     ]
+    }
+   }
+  }
+ ]
+}
