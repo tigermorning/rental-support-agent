@@ -16,21 +16,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 ROUTES = ["SCOPE", "ACCOUNT_PRIVACY", "LISTING", "INTERVIEW", "REPORT", "OTHER"]
 ACTIONS = ["ANSWER", "ESCALATE", "OUT_OF_SCOPE"]
-ESCALATE = "escalate_to_operator"
+# 도구 표는 context.py 한 곳에서만 관리한다.
+sys.path.insert(0, str(ROOT))
+from context import ESCALATE_TOOL as ESCALATE, TOOL_SECTIONS  # noqa: E402
 
-# data/SCHEMA.md 3장과 같은 표. (문서, 번호) -> 도구
-TOOL_SECTIONS = {
-    "get_service_scope": [("약관", n) for n in (1, 2, 3, 11)],
-    "get_liability_disputes": [("약관", 12), ("약관", 13), ("가이드라인", 7)],
-    "get_account_rules": [("약관", 4), ("약관", 5), ("처리방침", 7)],
-    "get_data_handling": [("처리방침", n) for n in (1, 2, 3, 6)],
-    "get_privacy_safeguards": [("처리방침", n) for n in (4, 5, 8, 9, 10, 11, 12)],
-    "get_listing_rules": [("약관", 6)],
-    "get_tenant_info_scope": [("약관", 7), ("가이드라인", 1), ("가이드라인", 2), ("가이드라인", 3)],
-    "get_rejection_and_conduct": [("가이드라인", 4), ("가이드라인", 5)],
-    "get_prohibited_acts": [("약관", 8), ("약관", 9)],
-    "get_report_process": [("약관", 10), ("가이드라인", 6)],
-}
 SECTION_TOOL = {sec: tool for tool, secs in TOOL_SECTIONS.items() for sec in secs}
 ALL_TOOLS = set(TOOL_SECTIONS) | {ESCALATE}
 
