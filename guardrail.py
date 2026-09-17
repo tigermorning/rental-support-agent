@@ -47,13 +47,19 @@ def _quantities(text):
     return with_unit, bare
 
 
+# 조항 원문의 고유어 수량 표현("둘 이상", "다섯 가지"). 답변이 다른 단위("두 건", "5개")로 옮겨 써도 같은 수량이다
+KOR_QTY_RE = re.compile(r"(?<![가-힣])(한|하나|두|둘|세|셋|네|넷|다섯|여섯|일곱|여덟|아홉|열)\s*(이상|이하|미만|초과|가지|개|명|건|곳)")
+
+
 def _allowed(sources):
-    units, nums = set(), set()
+    """(허용 수량+단위, 허용 숫자, 단위 무관 허용 숫자)"""
+    units, nums, free = set(), set(), set()
     for t in sources:
         u, _ = _quantities(t)
         units |= u
         nums |= set(re.findall(r"\d+", _normalize(t)))
-    return units, nums
+        free |= {str(KOR_NUM[m.group(1)]) for m in KOR_QTY_RE.finditer(t)}
+    return units, nums, free
 
 
 def verify(answer, question, sections, called_tools, escalated):
@@ -86,8 +92,10 @@ def verify(answer, question, sections, called_tools, escalated):
 
     body_wo_contacts = CONTACT_RE.sub("", body_wo_cite)
     units, bare = _quantities(body_wo_contacts)
-    ok_units, ok_nums = _allowed(sources)
-    unknown = sorted(units - ok_units) + sorted(bare - ok_nums, key=int)
+    ok_units, ok_nums, free = _allowed(sources)
+    # 아라비아 숫자("제3조")는 단위까지 맞아야 하고, 고유어 수량("둘 이상")은 단위가 달라도 된다
+    unit_unknown = [q for q in units - ok_units if re.match(r"\d+", q).group(0) not in free]
+    unknown = sorted(unit_unknown) + sorted(bare - ok_nums, key=int)
     if unknown:
         violations.append({"type": "출처 불명 숫자", "detail": unknown})
 
